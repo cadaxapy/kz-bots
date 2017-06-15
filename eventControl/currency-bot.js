@@ -40,6 +40,8 @@ events['message/new'] = function(req, res, callback) {
   answers(req).then(function(message) {
     req.content = message;
     api.sendMessage(req, res, callback)
+  }).catch(function(e) {
+    callback(e);
   }); 
 }
 
@@ -51,7 +53,7 @@ var answers = function(req) {
     if(content == 'help') {
     return resolve(text.commandInfo);
     }
-    else if(content == 'city') {
+    else if(content.toLowerCase() == 'city') {
       var message = 'Список городов: \n';
       parse.getCities().then(function(list) {
         for(var i = 0; i < list.length; i++) {
@@ -61,7 +63,7 @@ var answers = function(req) {
         return resolve(message);
       })
     }
-    else if(content.length == 2 &&  content.split(' ')[0].toLowwerCase() == 'city') {
+    else if(content.length == 2 &&  content.split(' ')[0].toLowerCase() == 'city') {
       var cityIndex = content.split[' '][1];
       return new Promise(function(resolve, reject) {
         parse.getCities().then(function(list) {
@@ -76,7 +78,7 @@ var answers = function(req) {
         })
       })
     }
-    else if(content.split(' ')[0].toLowwerCase() == 'convert') {
+    else if(content.split(' ')[0].toLowerCase() == 'convert') {
       var message = "";
       parse.getValutes().then(function(valutes) {
         var splitedContent = content.split(' ');
