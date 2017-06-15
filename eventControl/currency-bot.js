@@ -29,6 +29,8 @@ events['user/follow'] = function(req, res, callback) {
       })).then(function() {
         req.body.data.chat_id = body.data.id;
         api.sendMessage(req, res, callback);
+      }).catch(function(e) {
+        console.log(e);
       })
     })
   });
