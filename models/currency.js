@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     }
   }, {
+    underscored: true,
     classMethods: {
       associate: function(models) {
       },
