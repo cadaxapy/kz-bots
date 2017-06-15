@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-/*app.use(function(req, res, next) {
+app.use(function(req, res, next) {
   var ip = req.connection.remoteAddress;
   if(ip === "::ffff:77.235.20.133") {
     req.server = config.staging;
@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
     req.server = config.production;
   }
   next();
-})*/
+})
 
 // Setup routes
 var routes = glob.sync(config.ROOT_DIR + '/routes/*.js');
