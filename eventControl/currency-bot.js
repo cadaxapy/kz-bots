@@ -22,7 +22,8 @@ events['user/follow'] = function(req, res, callback) {
           return resolve();
         }
         var user = db.Currency.build({
-          user_id: req.body.data.id
+          user_id: req.body.data.id,
+          city: 'kurs/almaty'
         });
         user.save().then(function() {
           resolve();
