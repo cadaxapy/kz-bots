@@ -72,7 +72,7 @@ var answers = function(req) {
           }
           db.Currency.update({city: list[cityIndex].url}).then(function(user) {
             parse.getCurrency(user.city, function(parse) {
-              return resolve(getBanksList(parse));
+              return resolve('Выберите цифру нужного банка:\n' + getBanksList(parse));
             })
           })
         })
