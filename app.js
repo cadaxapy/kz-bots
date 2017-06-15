@@ -9,8 +9,8 @@ var glob = require('glob');
 var db = require('./models');
 var currency = require('./parse/currency-parse');
 var app = express();
-currency.convert({val1: '0', val2: '1', sum: '123'}).then(function() {
-  
+currency.getCurrency('/kurs/almaty', function(city) {
+  console.log(city);
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

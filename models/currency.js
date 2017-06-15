@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     city: {
       type: DataTypes.STRING,
-      defaultValue: '/city/almaty'
+      defaultValue: '/kurs/almaty'
     }
   }, {
     underscored: true,

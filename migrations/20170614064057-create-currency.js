@@ -15,7 +15,7 @@ module.exports = {
       },
       city: {
         type: Sequelize.STRING,
-        defaultValue: '/city/almaty'
+        defaultValue: '/kurs/almaty'
       },
       state: {
         type: Sequelize.INTEGER,

@@ -5,10 +5,8 @@ var utf8=require("utf8");
 module.exports.getCities = function() {
   return new Promise(function(resolve, reject) {
 
-    request({url: 'https://kurs-valut.kz/kurs/', method: 'GET'}, function(err, res, page) {
-      var $ = cheerio.load(page, {
-        decodeEntities: true
-      });
+    request({url: 'https://kurs-valut.kz/kurs/almaty', method: 'GET', encoding:"binary"}, function(err, res, page) {
+      var $ = cheerio.load(page);
       var a = [];
       $('div[class="modal-dialog"] > div > div[class="modal-body"] > ul > li').each(function(i, elem) {
         var city = {
@@ -22,9 +20,10 @@ module.exports.getCities = function() {
   })
 }
 module.exports.getCurrency = function(city, callback) {
-  request({uri: "https://kurs-valut.kz/" + city, method:"GET", encoding:"binary"}, function(err,res,page) {
+  request({uri: "https://kurs-valut.kz" + city, method:"GET", encoding:"binary"}, function(err,res,page) {
     var $ = cheerio.load(page);
     var array = [];
+    console.log(res);
     $('div[id="tab-1"] > div > table > tbody > tr').each(function(i, elem) {
       var titles = [];
       $(elem).children('td').each(function(index, values) {
