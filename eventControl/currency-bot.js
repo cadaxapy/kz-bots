@@ -2,7 +2,7 @@ var api = require('../api/api.js');
 var text = require('../localization/currency-text.js');
 var parse = require('../parse/currency-parse');
 var db = require('../models');
-
+var emoji=['0⃣', '1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣'];
 var events = [];
 
 events['user/follow'] = function(req, res, callback) {
@@ -57,9 +57,9 @@ var answers = function(req) {
       var message = 'Список городов: \n';
       parse.getCities().then(function(list) {
         for(var i = 0; i < list.length; i++) {
-          message = message + i + ' - ' + list[i].name;
+          message = message + i + ' - ' + list[i].name + '\n';
         }
-        message = message + '\n' + 'Чтобы выбрать город введите команду city и индекс город,например: "city 1"';
+        message = message + '\n' + 'Чтобы выбрать город введите команду city и индекс города,например: "city 1"';
         return resolve(message);
       })
     }
@@ -117,7 +117,6 @@ var answers = function(req) {
 }
 var getBanksList = function(parse) {
   var banks = '';
-  var emoji=['0⃣', '1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣'];
     for(var i = 0; i < parse.length; i++) {
       var c = i + 1;
       var sign = c > 9 ? emoji[parseInt(c / 10)] + emoji[c % 10] : emoji[c];
