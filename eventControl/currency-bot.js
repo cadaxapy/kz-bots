@@ -8,6 +8,7 @@ var events = [];
 events['user/follow'] = function(req, res, callback) {
   req.content = text.hello + '\n' + text.commandInfo;
   api.createChat(req, res, function(err, res, body) {
+    console.log(body);
     if(err) {
       return callback(err);
     }
