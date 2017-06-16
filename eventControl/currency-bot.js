@@ -79,6 +79,7 @@ var answers = function(req) {
       })
     }
     else if(content.split(' ')[0] == 'convert') {
+      content = content.toUpperCase();
       var message = "";
       parse.getValutes().then(function(valutes) {
         var splitedContent = content.split(' ');
