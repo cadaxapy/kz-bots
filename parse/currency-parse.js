@@ -78,7 +78,6 @@ module.exports.convert = function(data) {
         }
         converts.push(obj)
       });
-      console.log(converts);
       resolve(converts);
     })
   })
