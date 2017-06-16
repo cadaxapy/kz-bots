@@ -70,7 +70,7 @@ var answers = function(req) {
           if(list[cityIndex] == undefined) {
             return resolve('Неправильный индекс');
           }
-          db.Currency.update({city: list[cityIndex].url}).then(function(user) {
+          db.Currency.update({city: list[cityIndex].url}, {user_id: sender_id}).then(function(user) {
             parse.getCurrency(user.city, function(parse) {
               return resolve(getBanksList(parse));
             })
@@ -84,16 +84,11 @@ var answers = function(req) {
       parse.getValutes().then(function(valutes) {
         var splitedContent = content.split(' ');
         if(splitedContent.length != 4 || valutes.indexOf(splitedContent[2]) == -1 || valutes.indexOf(splitedContent[3]) == -1) {
-          console.log(valutes);
-          console.log(splitedContent[2]);
-          console.log(valutes.indexOf(splitedContent[2]))
-          console.log(splitedContent.length);
-          console.log(valutes.indexOf(splitedContent[3]))
           return resolve('Некорректный ввод.Введите как на примере:convert 100 RUB EUR.\nДоступные валюты: ' + valutes.join());
         }
         parse.convert({val1: valutes.indexOf(splitedContent[2]), val2: valutes.indexOf(splitedContent[3]), sum: splitedContent[1]}).then(function(items) {
           for(var idx in items) {
-            message += splitedContent[1] + ' ' + splitedContent[2] + ' = ' + items[idx].converted + ' ' + splitedContent[3] + '(' + items[idx].name +')\n';
+            message += splitedContent[1] + ' ' + splitedContent[2] + ' = ' + items[idx].converted + '(' + items[idx].name +')\n';
           }
           return resolve(message);
         });
