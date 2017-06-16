@@ -47,13 +47,13 @@ events['message/new'] = function(req, res, callback) {
 
 
 var answers = function(req) {
-  var content = req.body.data.content;
+  var content = req.body.data.content/toLowerCase();
   var sender_id = req.body.data.sender_id;
   return new Promise(function(resolve, reject) {
     if(content == 'help') {
     return resolve(text.commandInfo);
     }
-    else if(content.toLowerCase() == 'city') {
+    else if(content == 'city') {
       var message = 'Список городов: \n';
       parse.getCities().then(function(list) {
         for(var i = 0; i < list.length; i++) {
@@ -63,7 +63,7 @@ var answers = function(req) {
         return resolve(message);
       })
     }
-    else if(content.length == 2 &&  content.split(' ')[0].toLowerCase() == 'city') {
+    else if(content.length == 2 &&  content.split(' ')[0] == 'city') {
       var cityIndex = content.split[' '][1];
       return new Promise(function(resolve, reject) {
         parse.getCities().then(function(list) {
@@ -78,11 +78,11 @@ var answers = function(req) {
         })
       })
     }
-    else if(content.split(' ')[0].toLowerCase() == 'convert') {
+    else if(content.split(' ')[0] == 'convert') {
       var message = "";
       parse.getValutes().then(function(valutes) {
         var splitedContent = content.split(' ');
-        if(splitedContent.length != 3 || valutes.indexOf(splitedContent[2]) || valutes.indexOf(splitedContent[3])) {
+        if(splitedContent.length != 3 || valutes.indexOf(splitedContent[2]) == -1 || valutes.indexOf(splitedContent[3]) == -1) {
           return resolve('Некорректный ввод.Введите как на примере:convert 100 RUB EUR.\nДоступные валюты: ' + valutes.join());
         }
         parse.convert({val1: valute.indexOf(splitedContent[2]), val2: valute.indexOf(splitedContent[3]), sum: splitedContent[1]}).then(function(data) {
@@ -98,7 +98,7 @@ var answers = function(req) {
         parse.getCurrency(user.city, function(parse) {
           var message = "";
           for(var i = 0; i < parse.length; i++) {
-            if(parseInt(content) - 1 == i) {
+            if(parseInt(content) -xz 1 == i) {
               message = (parse[i].name+"\n\
             ПОКУПКА     ПРОДАЖА\n\
 USD:     "+parse[i].USD.in+"           "+parse[i].USD.out+"\n"+
