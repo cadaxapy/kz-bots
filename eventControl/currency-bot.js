@@ -84,8 +84,11 @@ var answers = function(req) {
       parse.getValutes().then(function(valutes) {
         var splitedContent = content.split(' ');
         if(splitedContent.length != 3 || valutes.indexOf(splitedContent[2]) == -1 || valutes.indexOf(splitedContent[3]) == -1) {
+          console.log(valutes);
           console.log(splitedContent[2]);
           console.log(valutes.indexOf(splitedContent[2]))
+          console.log(splitedContent.length);
+          console.log(valutes.indexOf(splitedContent[3]))
           return resolve('Некорректный ввод.Введите как на примере:convert 100 RUB EUR.\nДоступные валюты: ' + valutes.join());
         }
         parse.convert({val1: valute.indexOf(splitedContent[2]), val2: valute.indexOf(splitedContent[3]), sum: splitedContent[1]}).then(function(data) {
