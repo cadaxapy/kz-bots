@@ -72,7 +72,7 @@ var answers = function(req) {
           }
           db.Currency.update({city: list[cityIndex].url}).then(function(user) {
             parse.getCurrency(user.city, function(parse) {
-              return resolve('Выберите цифру нужного банка:\n' + getBanksList(parse));
+              return resolve(getBanksList(parse));
             })
           })
         })
@@ -100,11 +100,11 @@ var answers = function(req) {
           for(var i = 0; i < parse.length; i++) {
             if(parseInt(content) == i) {
               message = (parse[i].name+"\n\
-                          ПОКУПКА     ПРОДАЖА\n\
-                USD:     "+parse[i].USD.in+"           "+parse[i].USD.out+"\n"+
-                "EUR:     "+parse[i].EUR.in+"           "+parse[i].EUR.out+"\n"+
-                "RUB:     "+parse[i].RUB.in+"           "+parse[i].RUB.out+'\n'+
-                "Обновлено:"+parse[i].time+'\n'+emoji[0]+"Вернуться в меню").trim();
+            ПОКУПКА     ПРОДАЖА\n\
+USD:     "+parse[i].USD.in+"           "+parse[i].USD.out+"\n"+
+"EUR:     "+parse[i].EUR.in+"           "+parse[i].EUR.out+"\n"+
+"RUB:     "+parse[i].RUB.in+"           "+parse[i].RUB.out+'\n'+
+"Обновлено:"+parse[i].time+'\n'+emoji[0]+"Вернуться в меню").trim();
               return resolve(message);
             }
           }
@@ -122,7 +122,7 @@ var getBanksList = function(parse) {
       var sign = c > 9 ? emoji[parseInt(c / 10)] + emoji[c % 10] : emoji[c];
       banks=banks+sign+parse[i].name+"\n";
     }
-    return banks;
+    return 'Выберите цифру нужного банка:\n' + banks;
 }
 
 module.exports = events;
