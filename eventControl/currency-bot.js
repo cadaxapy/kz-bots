@@ -91,7 +91,7 @@ var answers = function(req) {
           console.log(valutes.indexOf(splitedContent[3]))
           return resolve('Некорректный ввод.Введите как на примере:convert 100 RUB EUR.\nДоступные валюты: ' + valutes.join());
         }
-        parse.convert({val1: valute.indexOf(splitedContent[2]), val2: valute.indexOf(splitedContent[3]), sum: splitedContent[1]}).then(function(data) {
+        parse.convert({val1: valutes.indexOf(splitedContent[2]), val2: valutes.indexOf(splitedContent[3]), sum: splitedContent[1]}).then(function(data) {
           for(var i in data) {
             message += splitedContent[1] + ' ' + splitedContent[2] + ' = ' + data.converted + ' ' + splitedContent[3] + '(' + data.name +')' ;
           }
