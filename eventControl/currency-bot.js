@@ -83,7 +83,7 @@ var answers = function(req) {
       var message = "";
       parse.getValutes().then(function(valutes) {
         var splitedContent = content.split(' ');
-        if(splitedContent.length != 3 || valutes.indexOf(splitedContent[2]) == -1 || valutes.indexOf(splitedContent[3]) == -1) {
+        if(splitedContent.length != 4 || valutes.indexOf(splitedContent[2]) == -1 || valutes.indexOf(splitedContent[3]) == -1) {
           console.log(valutes);
           console.log(splitedContent[2]);
           console.log(valutes.indexOf(splitedContent[2]))

@@ -56,7 +56,7 @@ module.exports.getValutes = function() {
       var $ = cheerio.load(page);
       var valutes = [];
       $('select[name="val1"] > option').each(function(i, elem) {
-        valutes.push($(elem).text());
+        valutes.push($(elem).text().trim());
       })
       resolve(valutes);
     })
