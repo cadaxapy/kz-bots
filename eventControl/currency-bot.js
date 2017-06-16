@@ -98,7 +98,7 @@ var answers = function(req) {
         parse.getCurrency(user.city, function(parse) {
           var message = "";
           for(var i = 0; i < parse.length; i++) {
-            if(parseInt(content) -xz 1 == i) {
+            if(parseInt(content) - 1 == i) {
               message = (parse[i].name+"\n\
             ПОКУПКА     ПРОДАЖА\n\
 USD:     "+parse[i].USD.in+"           "+parse[i].USD.out+"\n"+
