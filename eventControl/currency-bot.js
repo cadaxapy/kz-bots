@@ -47,7 +47,7 @@ events['message/new'] = function(req, res, callback) {
 
 
 var answers = function(req) {
-  var content = req.body.data.content/toLowerCase();
+  var content = req.body.data.content.toLowerCase();
   var sender_id = req.body.data.sender_id;
   return new Promise(function(resolve, reject) {
     if(content == 'help') {
