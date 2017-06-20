@@ -15,7 +15,9 @@ api.sendMessage = function(req, res, callback) {
     json: true
   }
   console.log(data);
-  request(data, callback);
+  setTimeOut(function {
+    request(data, callback);
+  }, 500);
 }
 api.createChat = function(req, res, callback) {
   var data = {
