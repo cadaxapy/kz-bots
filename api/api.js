@@ -15,7 +15,7 @@ api.sendMessage = function(req, res, callback) {
     json: true
   }
   console.log(data);
-  setTimeOut(function {
+  setTimeout(function() {
     request(data, callback);
   }, 500);
 }
