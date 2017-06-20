@@ -69,7 +69,7 @@ var answers = function(req) {
         if(list[cityIndex] == undefined) {
           return resolve('Неправильный индекс');
         }
-        db.Currency.update({city: list[cityIndex].url}, {user_id: sender_id}).then(function(user) {
+        db.Currency.update({city: list[cityIndex].url}, {where: {user_id: sender_id} }).then(function(user) {
           parse.getCurrency(user.city, function(parse) {
             return resolve(getBanksList(parse));
           })
