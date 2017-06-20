@@ -99,7 +99,7 @@ var answers = function(req) {
           }
           break;
         case 1:
-          parse.getMoviesList({day: kino.day, city: kino.city, index: content - 1, movie: true}).then(function(movies) {
+          parse.getMoviesList({day: kino.day, city: kino.city, index: parseInt(content) - 1, movie: true}).then(function(movies) {
             kino.set('state', 0);
             kino.set('day', 0);
             kino.save().then(function() {
