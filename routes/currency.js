@@ -4,6 +4,8 @@ var eventControl = require('../eventControl/currency-bot.js')
 
 module.exports = function(app) {
   router.post('/', function(req, res) {
+    var config = app.get('config');
+    req.server.token = config.tokens.currency;
     var event = req.body.event;
     if(!event || !eventControl[event]) {
       return res.json({
