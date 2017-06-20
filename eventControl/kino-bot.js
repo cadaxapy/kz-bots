@@ -73,8 +73,8 @@ var answers = function(req) {
                 return resolve('Неправильный индекс');
               }
               kino.set('city', list[cityIndex].index);
-              kino.save().then(function(user) {
-                parse.getCurrency(user.city, function(parse) {
+              kino.save().then(function() {
+                parse.getCurrency(list[cityIndex].index, function(parse) {
                   return resolve(getBanksList(parse));
                 });
               });
