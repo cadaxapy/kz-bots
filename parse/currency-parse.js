@@ -20,7 +20,7 @@ module.exports.getCities = function() {
   })
 }
 module.exports.getCurrency = function(city, callback) {
-  request({uri: "https://kurs-valut.kz" + city, method:"GET", encoding:"binary"}, function(err,res,page) {
+  request({url: "https://kurs-valut.kz" + city, method:"GET", encoding:"binary"}, function(err,res,page) {
     var $ = cheerio.load(page);
     var array = [];
     console.log(res);
