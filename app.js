@@ -7,9 +7,9 @@ var bodyParser = require('body-parser');
 var config = require('./config.js')
 var glob = require('glob');
 var db = require('./models');
-var currency = require('./parse/currency-parse');
+var currency = require('./parse/kino-parse');
 var app = express();
-/*currency.getCurrency('/kurs/almaty', function(city) {
+/*currency.getMoviesList({city: 2, day: 0, index: 1}).then(function(city) {
   console.log(city);
 });*/
 // view engine setup

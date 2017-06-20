@@ -19,6 +19,7 @@
     "request": "^2.79.0",
     "sequelize": "^4.1.0",
     "serve-favicon": "~2.3.0",
+    "superagent": "^3.5.2",
     "utf8": "^2.1.2"
   }
 }
