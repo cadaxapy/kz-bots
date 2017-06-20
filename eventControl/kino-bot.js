@@ -80,7 +80,8 @@ var answers = function(req) {
               });
             });
           }
-          else if(content  > 0 && content < 4) {
+          else if(content.split(' ').length == 2 && content.split(' ')[0] == 'day') {
+            content = content.split(' ')[1];
             var validDays = [1, 2 , 3];
             if(validDays.indexOf(parseInt(content)) == -1 ) {
               return resolve('Невалидный день');
