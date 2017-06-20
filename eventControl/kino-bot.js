@@ -123,10 +123,10 @@ var getMoviesList = function(parse) {
 }
 
 var getMovieTime = function(parse) {
-  console.log(parse);
   var item = '';
   for(var i = 0; i < parse.length; i++) {
     item += 'Имя:' + parse[i].name + '\nВремя:' + parse[i].time + '\nБилеты:\n' + '  Взрослые: ' + parse[i].adult + '\n  Дети: ' + parse[i].child + '\n  Студенты: ' + parse[i].student + '\n\n'; 
   }
+  return item;
 }
 module.exports = events;
