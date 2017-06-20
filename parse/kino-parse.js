@@ -17,6 +17,7 @@ module.exports.getCities = function() {
         a.push(city);
       });
       console.log(a);
+      resolve(a);
     })
   })
 }
