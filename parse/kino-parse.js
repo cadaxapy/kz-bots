@@ -28,9 +28,8 @@ module.exports.getMoviesList = function(data) {
       var page = res.text;
       var $ = cheerio.load(page);
       var movies = [];
-      console.log($($('div[class="mov_week_detail"]').get(0)).children('div').children('table').children('tr:nth-child(5)').text());
       $('div[class="mov_week"]').each(function(i, elem) {
-
+        console.log(i);
         if(data.index == i && data.movie) {
           var seances = [];
           $($('div[class="mov_week_detail"]').get(i)).children('div').children('table').children('tr:nth-child(5)').children('td').children('table').children('tr[class="seance_active"]').each(function(idx, tr) {
