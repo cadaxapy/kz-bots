@@ -117,7 +117,7 @@ var getMoviesList = function(parse) {
     for(var i = 0; i < parse.length; i++) {
       var c = i + 1;
       var sign = c > 9 ? emoji[parseInt(c / 10)] + emoji[c % 10] : emoji[c];
-      banks=banks+sign+parse[i].name+"\n";
+      banks=banks+sign+parse[i]+"\n";
     }
     return 'Выберите цифру нужного фильма:\n' + banks;
 }
