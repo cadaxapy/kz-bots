@@ -66,7 +66,7 @@ var answers = function(req) {
               return resolve(message);
             })
           }
-          else if(content.length == 2 &&  content.split(' ')[0] == 'city') {
+          else if(content.split(' ').length == 2 &&  content.split(' ')[0] == 'city') {
             var cityIndex = content.split[' '][1];
             parse.getCities().then(function(list) {
               if(list[cityIndex] == undefined) {
