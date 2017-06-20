@@ -12,7 +12,7 @@ events['user/follow'] = function(req, res, callback) {
     if(err) {
       return callback(err);
     }
-    db.Currency.findOne({
+    db.Kino.findOne({
       where: {
         user_id: req.body.data.id
       }
@@ -96,6 +96,7 @@ var answers = function(req) {
           else {
             return resolve(text.commandInfo);
           }
+          break;
         case 1:
           parse.getMoviesList({day: kino.day, city: kino.city, index: content - 1, movie: true}).then(function(movies) {
             kino.set('state', 0);
