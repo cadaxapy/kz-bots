@@ -29,7 +29,6 @@ module.exports.getMoviesList = function(data) {
       var $ = cheerio.load(page);
       var movies = [];
       $('div[class="mov_week"]').each(function(i, elem) {
-        console.log(i);
         if(data.index == i && data.movie) {
           var seances = [];
           $($('div[class="mov_week_detail"]').get(i)).children('div').children('table').children('tr:nth-child(5)').children('td').children('table').children('tr[class="seance_active"]').each(function(idx, tr) {
@@ -54,12 +53,12 @@ module.exports.getMoviesList = function(data) {
             rate: $(title[2]).children('td').children('div[class="rate-box"]').children('div[class="star-rate-text"]').children('b').text().trim(),
             voiceCount: $(title[2]).children('td').children('div[class="rate-box"]').children('span').text().trim()
           }*/
-        }
-        if(data.index != i && data.movie) {
-          return reject('Неправильный номер фильма')
         } 
         movies.push($(elem).text().trim());
       });
+      if(data.movie) {
+        return reject('Неправильный номер фильма')
+      }
       resolve(movies);
     })
   })
