@@ -67,7 +67,7 @@ var answers = function(req) {
             })
           }
           else if(content.split(' ').length == 2 &&  content.split(' ')[0] == 'city') {
-            var cityIndex = content.split[' '][1];
+            var cityIndex = content.split(' ')[1];
             parse.getCities().then(function(list) {
               if(list[cityIndex] == undefined) {
                 return resolve('Неправильный индекс');
