@@ -10,13 +10,15 @@ var events = [];
 events['user/follow'] = function(req, res, callback) {
   req.content = text.hello + '\n' + text.commandInfo;
   api.createChat(req, res, function(err, res, body) {
+    console.log(body);
     db.Chat.count({where: {user_id: req.body.data.id}}).then(function(total) {
       if(total > 0) {
         return callback();
       }
       var user = db.Chat.build({
         user_id: req.body.data.id,
-        chat_id: body.data.chat_id
+        chat_id: body.data.chat_id,
+        name: faker.lorem.word()
       });
       user.save().then(function() {
         callback();
