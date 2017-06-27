@@ -34,19 +34,26 @@ events['user/unfollow'] = function(req, res, callback) {
 }
 events['message/new'] = function(req, res, callback) {
   var content = req.body.data.content;
+  var date = new Date();
   db.Chat.findOne({where: {user_id: req.body.data.sender_id}}).then(function(user) {
-    if(content == '/start') {
+    if(date.getHours() < 22 && date.getHours > 5) {
+      req.content = 'Чат работает только с 22:00 до 05:00';
+      return api.sendMessage(req, res, callback);
+    }
+    else if(content == '/start') {
       setStatus({status: 1, sender_id: req.body.data.sender_id}).then(function() {
-        return callback();
+        req.content = 'Вы подключились к чату.Приятного общения.Чтобы отключиться,введите команду /end';
+        api.sendMessage(req, res, callback)
       })
     }
     else if(content == '/end') {
       setStatus({status: 0, sender_id: req.body.data.sender_id}).then(function() {
+        req.content = 'Вы отключились.Чтобы обратно начать общение,введите команду /start';
         return callback();
       })
     } else {
       if(user.status == 0) {
-        req.content = "Чтобы подключится к чату,введите команду /start";
+        req.content = "Чтобы подключиться к чату,введите команду /start";
         return api.sendMessage(req, res, callback);
       }
       db.Chat.findAll({
