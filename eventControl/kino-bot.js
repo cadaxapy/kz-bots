@@ -2,7 +2,6 @@ var api = require('../api/api.js');
 var text = require('../localization/kino-text.js');
 var parse = require('../parse/kino-parse');
 var db = require('../models');
-var config = require('../config.js');
 var emoji=['0⃣', '1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣'];
 var events = [];
 

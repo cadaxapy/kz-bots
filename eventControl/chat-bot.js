@@ -17,7 +17,7 @@ events['user/follow'] = function(req, res, callback) {
       }
       var user = db.Chat.build({
         user_id: req.body.data.id,
-        chat_id: body.data.chat_id,
+        chat_id: body.data.id,
         name: faker.lorem.word()
       });
       user.save().then(function() {
