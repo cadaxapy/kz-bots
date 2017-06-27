@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false
       },
       status: {
-        type: Sequelize.INEGER,
+        type: Sequelize.INTEGER,
         defaultValue: 0
       },
       name: {
