@@ -17,7 +17,7 @@ api.sendMessage = function(req, res, callback) {
   console.log(data);
   setTimeout(function() {
     request(data, callback);
-  }, 500);
+  }, 700);
 }
 api.createChat = function(req, res, callback) {
   var data = {

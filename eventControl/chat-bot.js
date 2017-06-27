@@ -36,7 +36,7 @@ events['message/new'] = function(req, res, callback) {
   var content = req.body.data.content;
   var date = new Date();
   db.Chat.findOne({where: {user_id: req.body.data.sender_id}}).then(function(user) {
-    if(date.getHours() < 22 && date.getHours > 5) {
+    if(date.getHours() < 22 && date.getHours() > 5) {
       req.content = 'Чат работает только с 22:00 до 05:00';
       return api.sendMessage(req, res, callback);
     }
