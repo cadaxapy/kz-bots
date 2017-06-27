@@ -1,5 +1,5 @@
 var api = require('../api/api.js');
-var text = require('../localization/currency-text.js');
+var text = require('../localization/chat-text.js');
 var parse = require('../parse/currency-parse');
 var faker = require('faker');
 var db = require('../models');
@@ -21,7 +21,8 @@ events['user/follow'] = function(req, res, callback) {
         name: faker.lorem.word()
       });
       user.save().then(function() {
-        callback();
+        req.body.data.chat_id = body.data.id;
+        api.sendMessage(req, res, callback);
       })
     })
   });
