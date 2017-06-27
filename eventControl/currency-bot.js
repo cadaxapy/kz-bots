@@ -32,6 +32,7 @@ events['user/follow'] = function(req, res, callback) {
         api.sendMessage(req, res, callback);
       }).catch(function(e) {
         console.log(e);
+        callback(e);
       })
     })
   });

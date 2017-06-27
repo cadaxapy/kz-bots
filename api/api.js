@@ -1,5 +1,5 @@
 var request = require('request');
-
+var async = require('async');
 var api = {};
 api.sendMessage = function(req, res, callback) {
   var data = {
@@ -33,6 +33,31 @@ api.createChat = function(req, res, callback) {
     json: true
   }
   request(data, callback);
+}
+
+
+api.sendMessageToAll = function(data) {
+  return new Promise(function(resolve, reject) {
+    async.each(data.users, function(user, callback) {
+      request({
+        url: data.url + '/' + user.get('chat_id') + '/write',
+        method: 'POST',
+        headers: {
+          'X-Namba-Auth-Token': data.token, 
+        },
+        body: {
+          "type":"text/plain",
+          "content": user.get('name') + ':\n' + data.content
+        },
+        json: true
+      }, callback);
+    }, function(err) {
+      if(err) {
+        return reject(err);
+      }
+      resolve();
+    })
+  })
 }
 
 module.exports = api;
