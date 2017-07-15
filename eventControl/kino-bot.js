@@ -59,16 +59,20 @@ var answers = function(req) {
           else if(content == 'city') {
             var message = 'Список городов: \n';
             parse.getCities({city: kino.city}).then(function(list) {
+              var currentCity = "";
               for(var i = 0; i < list.length; i++) {
+                if(list[i].index == kino.city) {
+                  currentCity = list[i].name
+                }
                 message = message + i + ' - ' + list[i].name + '\n';
               }
-              message = message + '\n' + 'Чтобы выбрать город введите команду city и индекс города,например: "city 1"\nПо умолчанию:Алматы';
+              message = message + '\n' + 'Чтобы выбрать город введите команду city и индекс города,например: "city 1"\nТекущий город:' + currentCity;
               return resolve(message);
             })
           }
           else if(content.split(' ').length == 2 &&  content.split(' ')[0] == 'city') {
             var cityIndex = content.split(' ')[1];
-            parse.getCities().then(function(list) {
+            parse.getCities({city: kino.city}).then(function(list) {
               if(list[cityIndex] == undefined) {
                 return resolve('Неправильный индекс');
               }
