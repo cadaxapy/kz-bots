@@ -58,11 +58,11 @@ var answers = function(req) {
           }
           else if(content == 'city') {
             var message = 'Список городов: \n';
-            parse.getCities().then(function(list) {
+            parse.getCities({city: kino.city}).then(function(list) {
               for(var i = 0; i < list.length; i++) {
                 message = message + i + ' - ' + list[i].name + '\n';
               }
-              message = message + '\n' + 'Чтобы выбрать город введите команду city и индекс города,например: "city 1"';
+              message = message + '\n' + 'Чтобы выбрать город введите команду city и индекс города,например: "city 1"\nПо умолчанию:Алматы';
               return resolve(message);
             })
           }

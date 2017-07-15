@@ -2,10 +2,10 @@ var request=require("superagent");
 var cheerio=require("cheerio");
 var utf8=require("utf8");
 
-module.exports.getCities = function() {
+module.exports.getCities = function(data) {
   return new Promise(function(resolve, reject) {
     //request({uri: 'http://kino.kz/thisweek.asp', method: 'GET', encoding: "binary"}, function(err, res, page) {
-    request.get('http://kino.kz/thisweek.asp').end(function(err, res) {
+    request.get('http://kino.kz/thisweek.asp?city=' + data.city).end(function(err, res) {
       var page = res.text;
       var $ = cheerio.load(page);
       var a = [];
