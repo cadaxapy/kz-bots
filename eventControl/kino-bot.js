@@ -74,9 +74,7 @@ var answers = function(req) {
               }
               kino.set('city', list[cityIndex].index);
               kino.save().then(function() {
-                parse.getCurrency(list[cityIndex].index, function(parse) {
-                  return resolve(getBanksList(parse));
-                });
+                return resolve(text.switched_city + list[cityIndex].name + '\n' + text.commandInfo);
               });
             });
           }
