@@ -101,7 +101,7 @@ var answers = function(req) {
             kino.set('state', 0);
             kino.set('day', 0);
             kino.save().then(function() {
-              return resolve(getMovieTime(movies));
+              return resolve(getMovieTime(movies).trim());
             })
           }).catch(function(e) {
             return resolve(e);
