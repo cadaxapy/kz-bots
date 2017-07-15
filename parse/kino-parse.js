@@ -16,8 +16,7 @@ module.exports.getCities = function(data) {
         };
         a.push(city);
       });
-      console.log(a);
-      resolve(a);
+      resolve({cityList: a, currentCity: $('span[class="big_date"]').text().split('/')[0]});
     })
   })
 }
