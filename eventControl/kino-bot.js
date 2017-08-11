@@ -15,15 +15,15 @@ events['user/follow'] = function(req, res, callback) {
       where: {
         user_id: req.body.data.id
       }
-    }).then(function(user) {
+    }).then(function(kino) {
       (new Promise(function(resolve, reject) {
-        if(user) {
+        if(kino) {
           return resolve();
         }
-        var user = db.Kino.build({
+        var kino = db.Kino.build({
           user_id: req.body.data.id
         });
-        user.save().then(function() {
+        kino.save().then(function() {
           resolve();
         })
       })).then(function() {
