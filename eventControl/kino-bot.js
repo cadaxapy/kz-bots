@@ -6,7 +6,6 @@ var emoji=['0⃣', '1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣
 var events = [];
 
 events['user/follow'] = function(req, res, callback) {
-  req.content = text.hello + '\n' + text.commandInfo;
   api.createChat(req, res, function(err, res, body) {
     console.log(body);
     if(err) {
@@ -28,8 +27,11 @@ events['user/follow'] = function(req, res, callback) {
           resolve();
         })
       })).then(function() {
-        req.body.data.chat_id = body.data.id;
-        api.sendMessage(req, res, callback);
+        parse.getCities({city: kino.city}).then(function(data) {
+          req.content = 'Здравсвуйте!Ваш город:' + data.currentCity + '\nЯ помогу подобрать фильм для посмотра в кинотеатре' + '\n' + text.commandInfo;
+          req.body.data.chat_id = body.data.id;
+          api.sendMessage(req, res, callback);
+        })
       }).catch(function(e) {
         console.log(e);
       })
