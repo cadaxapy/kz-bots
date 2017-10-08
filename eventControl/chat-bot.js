@@ -34,7 +34,7 @@ events['message/new'] = function(req, res, callback) {
   db.Chat.findOne({where: {user_id: req.body.data.sender_id}}).then(function(user) {
     (new Promise(function(resolve, reject) {
       if(!user) {
-        return createUser({user_id: req.body.data.sender_id, chat_id: req.body.data.chat_id})
+        createUser({user_id: req.body.data.sender_id, chat_id: req.body.data.chat_id}).then(resolve)
       }
       return resolve(user);
     })).then(function(user) {

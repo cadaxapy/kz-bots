@@ -3,9 +3,9 @@ var router = express.Router();
 var eventControl = require('../eventControl/chat-bot.js')
 
 module.exports = function(app) {
+  var db = app.get('db');
   router.post('/', function(req, res) {
     var config = app.get('config');
-    var db = app.get('db');
     req.server.token = config.tokens.chat;
     var event = req.body.event;
     if(!event || !eventControl[event]) {
