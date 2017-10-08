@@ -7,6 +7,12 @@ var config = require('../config.js');
 var emoji=['0⃣', '1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣'];
 var events = [];
 
+var GoogleSpreadsheet = require('google-spreadsheet');
+var creds = require('./client_secret.json');
+
+// Create a document object using the ID of the spreadsheet - obtained from its URL.
+var doc = new GoogleSpreadsheet('1Bufq7xUf6sUrwZleF6Xh36YjpMCtavalh9rRom0CVJI');
+
 events['user/follow'] = function(req, res, callback) {
   req.content = text.hello + '\n' + text.commandInfo;
   api.createChat(req, res, function(err, res, body) {
@@ -62,17 +68,30 @@ events['message/new'] = function(req, res, callback) {
           user_id: req.body.data.sender_id,
           chat_id: req.body.data.chat_id,
           content: req.body.data.content
-        }).then(function() {
-          db.Chat.findAll({
-            where: {
-              status: 1,
-              user_id: {
-                $ne: req.body.data.sender_id
+        }).then(function(message) {
+          doc.useServiceAccountAuth(creds, function (err) {
+            doc.addRow(1, {
+              user_id: message.get('user_id'),
+              chat_id: message.get('chat_id'),
+              content: message.get('content'),
+              created_at: message.get('created_at'),
+              updated_at: message.get('updated_at')
+            }, function(err) {
+              if(err) {
+                return console.log(err);
               }
-            }
-          }).then(function(users) {
-            api.sendMessageToAll({sender: user, users: users, token: config.tokens.chat, url: config.production.url, content: req.body.data.content})
-            .then(callback).catch(callback);
+              db.Chat.findAll({
+                where: {
+                  status: 1,
+                  user_id: {
+                    $ne: req.body.data.sender_id
+                  }
+                }
+              }).then(function(users) {
+                api.sendMessageToAll({sender: user, users: users, token: config.tokens.chat, url: config.production.url, content: req.body.data.content})
+                .then(callback).catch(callback);
+              });
+            });
           });
         });
       }
