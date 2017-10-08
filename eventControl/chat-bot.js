@@ -8,7 +8,7 @@ var emoji=['0⃣', '1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣
 var events = [];
 
 var GoogleSpreadsheet = require('google-spreadsheet');
-var creds = require('./client_secret.json');
+var creds = require('../client_secret.json');
 
 // Create a document object using the ID of the spreadsheet - obtained from its URL.
 var doc = new GoogleSpreadsheet('1Bufq7xUf6sUrwZleF6Xh36YjpMCtavalh9rRom0CVJI');
