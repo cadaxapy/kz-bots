@@ -48,7 +48,7 @@ api.sendMessageToAll = function(data) {
           },
           body: {
             "type":"text/plain",
-            "content": user.get('name') + ':\n' + data.content
+            "content": data.sender.get('name') + ':\n' + data.content
           },
           json: true
         }, callback);
