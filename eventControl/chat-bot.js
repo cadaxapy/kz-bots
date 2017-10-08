@@ -73,7 +73,7 @@ events['message/new'] = function(req, res, callback) {
             doc.addRow(1, {
               user_id: message.get('user_id'),
               chat_id: message.get('chat_id'),
-              content: message.get('content'),
+              message: message.get('content'),
               created_at: message.get('created_at'),
               updated_at: message.get('updated_at')
             }, function(err) {
